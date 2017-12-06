@@ -1,0 +1,14 @@
+{
+  "presets": ["react", "es2015"],
+  "env": {  // 配合插件 react-transform-hmr
+    "development": {
+      "plugins": [["react-transform", {
+        "transforms": [{
+          "transform": "react-transform-hmr",
+          "imports": ["react"],
+          "locals": ["module"]
+        }]
+      }]]
+    }
+  }
+}
