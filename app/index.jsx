@@ -1,14 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { hashHistory } from 'react-router'
 
+import RouteMap from './router/routeMap'
+//通用样式
 import './static/css/common.less'
 
-class Hello extends React.Component {
-  render() {
-    return (
-      <p>Hello Shayyee</p>
-    )
-  }
-}
-
-render(<Hello/>, document.getElementById('root'))
+render(
+  <RouteMap history={hashHistory}/>, document.getElementById('root')
+)

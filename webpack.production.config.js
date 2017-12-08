@@ -19,9 +19,9 @@ module.exports = {
     // ]
   },
   output: {
-    filename: "[name].[chunkhash:8].js",
+    filename: "js/[name].[chunkhash].js",
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/'
+    publicPath: './'
   },
   devtool: 'none',
   resolve:{
@@ -96,18 +96,13 @@ module.exports = {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        //supresses warnings, usually from module minification
-        warnings: false
-      }
-    }),
+    new webpack.optimize.UglifyJsPlugin(),
     // 分离CSS和JS文件
-    new ExtractTextPlugin('[name].[chunkhash:8].css'),
+    new ExtractTextPlugin('css/[name].[contenthash].css'),
     // 提供公共代码
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: '[name].[chunkhash:8].js'
+      filename: 'js/[name].[chunkhash].js'
     }),
 
     // split vendor js into its own file
@@ -130,7 +125,6 @@ module.exports = {
     //   name: 'manifest',
     //   minChunks: Infinity,
     // }),
-
     // 可在业务 js 代码中使用 __DEV__ 判断是否是dev模式（dev模式下可以提示错误、测试报告等, production模式不提示）
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
